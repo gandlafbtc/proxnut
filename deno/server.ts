@@ -5,8 +5,15 @@ const listener = Deno.listen({ port: 4444 });
 
 console.log("server listening on http://localhost:4444");
 
-await serveListener(listener, (request) => {
+const BOOK_ROUTE = new URLPattern({ pathname: "/test" });
 
+await serveListener(listener, (request) => {
+  
+  const match = BOOK_ROUTE.exec(request.url);
+
+  if (match) {
+    return new Response(`very secret`);
+  }
     
   const body = `Your user-agent is:\n\n${request.headers.get(
     "user-agent",

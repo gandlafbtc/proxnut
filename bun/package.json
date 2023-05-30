@@ -1,0 +1,17 @@
+{
+  "name": "proxnut",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run index.ts"
+  },
+  "devDependencies": {
+    "bun-types": "^0.6.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@cashu/cashu-ts": "^0.8.0-rc.4"
+  }
+}
