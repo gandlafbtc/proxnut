@@ -1,8 +1,12 @@
 import { CashuMint, CashuWallet, Token, getDecodedToken, getEncodedToken } from "@cashu/cashu-ts";
 import { CONFIG } from "./config.ts";
 
-const server = Bun.serve({
-    async fetch(request) {
+import { Elysia } from 'elysia'
+import cors from "@elysiajs/cors";
+
+new Elysia().use(cors())
+    .get('*', async ({request}) => 
+  {
       try {
         const { host, path, fee: hostFee } = createUrl(request.url);
         const { to: serviceRoute, fee: routeFee } = lookupRoute(path);
@@ -11,18 +15,22 @@ const server = Bun.serve({
           console.log('resource has a fee')
           await collectFee(fee, request.headers.get("X-Cashu") ?? "");
         }
-        return await fetch(host + serviceRoute, {
+
+        const response = await fetch(host + serviceRoute, {
           method: request.method,
           headers: request.headers,
           body: request.body,
-        });
+        })
+
+        return response
       } catch (error) {
         console.error(error);
-        return new Response(error, { status: 500 });
+        const response = new Response(error, { status: 500 });
+        return response
       }
     },
-    port: 3003,
-  });
+
+  ).listen('3003')
 
 function createUrl(url: string): { host: string; path: string; fee: number } {
   const { protocol, host, port, path } = splitUrl(url);
