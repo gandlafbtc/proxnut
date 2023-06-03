@@ -1,5 +1,7 @@
 # Proxnut: a cashu proxy that asks for nuts for a right of passage
 
+<img src="docs/proxnut.png" width="48px" height="48px">
+
 This is a work in progress. Deno does not work yet (presumably because of incompatibility issues between deno and cashu-ts). Bun seems to work fine, with exactly the same code. 
 
 To test this, please use the code in the bun folder.
