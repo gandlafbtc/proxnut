@@ -1,13 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Svelte Web Components Demo</title>
-    <script type="module" src="dist/lib/cashu-wallet.js"></script> 
+    <script type="module" src="dist/lib/cashu-wallet.js"></script>
 </head>
+<style>
+    .panel {
+        width: 50em;
+        display: flex;
+    }
+</style>
+
 <body>
-    <cashu-wallet>
-    </cashu-wallet>
-  </body>
+    <div class="panel">
+        <div>
+
+            <button onclick="withNut()" style="display: block;">
+                make request to /test with nut
+            </button>
+            <button onclick="withoutNut()" style="display: block;">
+                make request to /test without nut
+            </button>
+
+            <div>
+                response: <p id="response">
+                    waiting for request...
+                </p>
+            </div>
+        </div>
+        <cashu-wallet minturl="">
+        </cashu-wallet>
+    </div>
+</body>
+
 </html>
+
+<script>
+
+    function withNut() {
+        getNut()
+        document.querySelector('cashu-wallet').shadowRoot.querySelector('#base-div').addEventListener("return-nut", handleSendNut, { once: true });
+    }
+
+    async function withoutNut() {
+        const response = await fetch("http://localhost:3003/test")
+        data = await response.text()
+        document.getElementById('response').textContent = data
+    }
+
+    function getNut() {
+        const event = new CustomEvent("ask-for-nut", {
+            bubbles: true, composed: true, detail: {
+                amount: 1,
+            }
+        });
+        document.querySelector('cashu-wallet').shadowRoot.querySelector('#base-div').dispatchEvent(event)
+    }
+
+    async function handleSendNut(e) {
+        if (e.detail.error) {
+            console.error(error)
+            return
+        }
+        const response = await fetch("http://localhost:3003/test", {
+            headers: {
+                "X-Cashu": e.detail.token
+
+            }
+        })
+        data = await response.text()
+        document.getElementById('response').textContent = data
+    }
+</script>

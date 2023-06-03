@@ -3,7 +3,7 @@ import type { MintKeys, Proof } from "@cashu/cashu-ts";
 import { readable, writable } from "svelte/store";
 import type { Toast } from "./toast.js";
 
-const mint = readable(
+const mint = writable(
   "https://legend.lnbits.com/cashu/api/v1/4gr9Xcmz3XEkUNwiBiQGoC",
 );
 
