@@ -42,3 +42,15 @@ To add a mint, add the URL of the mint to the `ALLOWED_MINTS` list if the config
 
 
 On the demo backend, there is a unprotected resources, that routes freely (`/`) and there is a protected resource (`/test`) that asks for 1 satoshi per request.
+
+## Example frontend
+There is an example frontend in the `frontend/cashu-wallet-wc` folder, that can be run alongside the two other services. To use it, the wallet component must first be built from source:
+
+1. `cd frontend/cashu-wallet-wc`
+1. `npm i`
+1. `npm run build`
+
+after that, the `index.html` can be served as a web page. for example:
+
+1. `npm i -g http-server`
+1. `http-server`

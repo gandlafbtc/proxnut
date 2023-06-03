@@ -9,8 +9,10 @@
 </head>
 <style>
     .panel {
-        width: 50em;
+        width: 80em;
         display: flex;
+        flex-direction: row;
+        gap: 3em;
     }
 </style>
 
@@ -40,10 +42,7 @@
 
 <script>
 
-    function withNut() {
-        getNut()
-        document.querySelector('cashu-wallet').shadowRoot.querySelector('#base-div').addEventListener("return-nut", handleSendNut, { once: true });
-    }
+
 
     async function withoutNut() {
         const response = await fetch("http://localhost:3003/test")
@@ -60,9 +59,15 @@
         document.querySelector('cashu-wallet').shadowRoot.querySelector('#base-div').dispatchEvent(event)
     }
 
+    function withNut() {
+        getNut()
+        document.querySelector('cashu-wallet').shadowRoot.querySelector('#base-div').addEventListener("return-nut", handleSendNut, { once: true });
+    }
+
     async function handleSendNut(e) {
         if (e.detail.error) {
-            console.error(error)
+            document.getElementById('response').textContent = e.detail.error
+
             return
         }
         const response = await fetch("http://localhost:3003/test", {
