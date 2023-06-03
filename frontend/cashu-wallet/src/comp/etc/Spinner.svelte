@@ -1,1 +1,0 @@
-<div style="border-top-color:transparent" class="w-3 h-3 border-2 border-violet-300 rounded-full animate-spin"></div>
