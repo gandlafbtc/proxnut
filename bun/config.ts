@@ -1,12 +1,14 @@
 import { Config, Dictionary, Mode } from "./types.ts";
 
+const be_url = Bun.env.BACKEND_HOST??'localhost'
+
 /**
  * --------------edit this config-----------------
  */
 
 
 const HOST_MAP: Dictionary = {
-  "localhost:3003": { to: "localhost:4444", fee: 0 },
+  "localhost:3003": { to: `${be_url}:4444`, fee: 0 },
 };
 
 const ROUTE_MAP: Dictionary = {

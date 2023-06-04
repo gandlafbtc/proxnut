@@ -1,0 +1,25 @@
+version: '3'
+services:
+  proxnut:
+    build:
+      context: ./bun
+      dockerfile: Dockerfile
+    ports:
+        - "3003:3003"
+    environment:
+      - PROXY_HOST=proxnut
+      - BACKEND_HOST=backend
+  backend:
+    build:
+      context: ./deno
+      dockerfile: Dockerfile
+    ports:
+        - "4444:4444"
+
+  frontend:
+    build:
+      context: ./frontend/cashu-wallet-wc
+      dockerfile: Dockerfile
+    ports:
+        - "8080:80"
+

@@ -10,6 +10,7 @@ To test this, please use the code in the bun folder.
 
 ![setup](./docs/setup.png)
 
+
 ## How to configure it
 
 This proxy forwards requests only if they have a valid cashu token attached to the X-Cashu header. Configuration on mapping hosts, routes and how expensive routes are, can be made in the `config.ts` file. You can also configure the allowed mints.
@@ -35,6 +36,20 @@ To add a mint, add the URL of the mint to the `ALLOWED_MINTS` list if the config
 
 ## How to run
 
+The whole stack can be run with docker compose: 
+
+1. `docker-compose up --build` 
+
+this will run the applications on the following ports:
+
+1. `frontend` on port `8080`
+1. `proxnut` on port `3003`
+1. `backend` on port `4444`
+
+
+
+or you can use the manual setup:
+
 1. install bun: 
 ```curl -fsSL https://bun.sh/install | bash```
 1. run the proxy: ```bun run start```
@@ -43,12 +58,13 @@ To add a mint, add the URL of the mint to the `ALLOWED_MINTS` list if the config
 
 On the demo backend, there is a unprotected resources, that routes freely (`/`) and there is a protected resource (`/test`) that asks for 1 satoshi per request.
 
-## Example frontend
+### Example frontend
 There is an example frontend in the `frontend/cashu-wallet-wc` folder, that can be run alongside the two other services. To use it, the wallet component must first be built from source:
 
 1. `cd frontend/cashu-wallet-wc`
 1. `npm i`
 1. `npm run build`
+1. `cp dist/lib/cashu-wallet.js .`
 
 after that, the `index.html` can be served as a web page. for example:
 
