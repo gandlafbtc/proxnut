@@ -8,6 +8,7 @@ export interface Config {
   ROUTE_MAP: Dictionary;
   ALLOWED_MINTS: string[];
   MODE: Mode;
+  WEBSOCKET_MODE: boolean
 }
 
 export interface Dictionary {

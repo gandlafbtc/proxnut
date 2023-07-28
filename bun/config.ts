@@ -6,6 +6,7 @@ const be_url = Bun.env.BACKEND_HOST??'localhost'
  * --------------edit this config-----------------
  */
 
+const WEBSOCKET_MODE = false
 
 const HOST_MAP: Dictionary = {
   "localhost:3003": { to: `${be_url}:4444`, fee: 0 },
@@ -29,5 +30,6 @@ export const CONFIG: Config = {
   HOST_MAP,
   ROUTE_MAP,
   ALLOWED_MINTS,
-  MODE
+  MODE,
+  WEBSOCKET_MODE
 };
