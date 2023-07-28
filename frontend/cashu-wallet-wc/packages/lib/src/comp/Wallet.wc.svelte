@@ -1,4 +1,4 @@
-<svelte:options tag="cashu-wallet" />
+<svelte:options tag="proxnut-wallet" />
 
 <script lang="ts">
     import { onMount } from "svelte";
@@ -17,7 +17,6 @@
 
     const handleGetNutEvent = async (e) => {
         try {
-            console.log(e);
             const wallet = await getWallet();
             const { returnChange, send, newKeys } = await wallet.send(
                 e.detail.amount,
@@ -64,7 +63,7 @@
     let nav = "base";
 </script>
 
-<div class="relative right-2 top-2" id="base-div" bind:this={domElement}>
+<div class="relative right-2 top-2" id="cashu-base-div" bind:this={domElement}>
     <button
         on:click={() => (dropdownOpen = !dropdownOpen)}
         class="relative z-10 block rounded-md p-2 focus:outline-none bg-violet-300 opacity-90 hover:opacity-100"

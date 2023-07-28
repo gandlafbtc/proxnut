@@ -82,7 +82,7 @@ async function collectFee(fee: number, token: string): Promise<number> {
   }
   const collectedFee = await claimToken(token)
   if (collectedFee<fee) {
-    throw new Error("Token in X-Cashu did not yield enough");
+    throw new Error(`Token in X-Cashu did not yield enough... supplied: ${collectFee} sats ---- needed: ${fee} sats` );
   }
   return collectedFee
 }
