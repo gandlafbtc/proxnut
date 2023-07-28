@@ -13,7 +13,15 @@ new Elysia().onStart((()=>{console.log('listening on port 3003')})
   {
       try {
         const { host, path, fee: hostFee } = createUrl(request.url);
-        const { to: serviceRoute, fee: routeFee } = lookupRoute(path);
+        const routePath = lookupRoute(path)
+        if (!routePath) {
+          return await fetch(host + path, {
+            method: request.method,
+            headers: request.headers,
+            body: request.body,
+          })
+        }
+        const { to: serviceRoute, fee: routeFee } = routePath;
         const fee = hostFee + routeFee;
         if (fee) {
           console.log('resource has a fee')
