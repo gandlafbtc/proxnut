@@ -11,7 +11,7 @@
 
     const unlock = () => {
         isLoading = true;
-        withNut(price, urlBase + id, successUnlock, failUnlock);
+        cashuRequest(price, urlBase + id, successUnlock, failUnlock);
     };
 
     const successUnlock = async (response: Response, e) => {
@@ -29,8 +29,13 @@
             };
         } else if (contentType === "image/jpeg") {
             const blob = await response.blob();
-            var b64Response = btoa(String.fromCharCode.apply(null, new Uint8Array(await blob.arrayBuffer())));
-            imageContents = "data:image/png;base64," + b64Response;
+            var b64Response = btoa(
+                String.fromCharCode.apply(
+                    null,
+                    new Uint8Array(await blob.arrayBuffer())
+                )
+            );
+            imageContents = "data:image/jpeg;base64," + b64Response;
         }
         isLoading = false;
     };
@@ -40,7 +45,7 @@
         isLoading = false;
     };
 
-    const withNut = async (amount, url, cb, ecb) => {
+    const cashuRequest = async (amount, url, cb, ecb) => {
         const event = new CustomEvent("ask-for-nut", {
             bubbles: true,
             composed: true,

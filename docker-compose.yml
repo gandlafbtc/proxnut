@@ -2,7 +2,7 @@ version: '3'
 services:
   proxnut:
     build:
-      context: ./bun
+      context: ./proxnut-proxy
       dockerfile: Dockerfile
     ports:
         - "3003:3003"
@@ -11,7 +11,7 @@ services:
       - BACKEND_HOST=backend
   backend:
     build:
-      context: ./deno
+      context: ./demo-backend
       dockerfile: Dockerfile
     ports:
         - "4444:4444"
@@ -24,7 +24,7 @@ services:
         - "8080:80"
   demo:
     build:
-      context: ./demo
+      context: ./demo-frontend
       dockerfile: Dockerfile
     ports:
         - "5173:5173"
