@@ -1,3 +1,10 @@
+/**
+ * 
+ * @param {number} amount total amount for the route cost
+ * @param {string} url API url to access
+ * @param {Function<Response,Event>} cb callback on successful access
+ * @param {Function<Event>} ecb callback on unsuccessful access
+ */
 const cashuRequest = async (amount, url, cb, ecb) => {
     const event = new CustomEvent("ask-for-nut", {
         bubbles: true,

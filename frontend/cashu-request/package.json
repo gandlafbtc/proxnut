@@ -1,0 +1,24 @@
+{
+  "name": "@proxnut/cashu-request",
+  "version": "0.1.2",
+  "description": "request helper for proxnut requests",
+  "main": "cashuRequest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gandlafbtc/proxnut.git"
+  },
+  "keywords": [
+    "proxnut",
+    "cashu",
+    "ecash",
+    "proxy"
+  ],
+  "author": "gandlaf21",
+  "bugs": {
+    "url": "https://github.com/gandlafbtc/proxnut/issues"
+  },
+  "homepage": "https://github.com/gandlafbtc/proxnut#readme"
+}

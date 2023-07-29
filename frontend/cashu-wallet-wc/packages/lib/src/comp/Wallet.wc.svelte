@@ -2,7 +2,6 @@
 
 <script lang="ts">
     import { onMount } from "svelte";
-
     import { mint, tokens } from "../stores";
     import Base from "./Base.svelte";
     import Cashout from "./cashout/Cashout.svelte";
@@ -152,7 +151,7 @@
 </div>
 
 <style>
-    @import "cashu-wallet.css";
+    @import "/cashu-wallet.css";
 
     #base-div {
         line-height: 1.5;
