@@ -4,7 +4,7 @@
     export let title;
     export let price;
 
-    const urlBase = "http://localhost:3003/";
+    const urlBase = "http://demo-api.proxnut.com/";
     let isLoading = false;
     let contents;
     let jsonContents;
