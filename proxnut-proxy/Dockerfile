@@ -1,8 +1,6 @@
-FROM oven/bun
+FROM oven/bun:latest
 WORKDIR /app
-COPY package.json package.json
-COPY bun.lockb bun.lockb
-RUN bun install
 COPY . .
+RUN bun install
 EXPOSE 3003
 ENTRYPOINT ["bun", "index.ts"]

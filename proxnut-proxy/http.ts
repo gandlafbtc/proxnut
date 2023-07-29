@@ -4,8 +4,6 @@ import { CONFIG } from "./config.js";
 import { Elysia } from 'elysia'
 import cors from "@elysiajs/cors";
 
-
-
 export const initializeHTTP = () => {
 new Elysia().onStart((()=>{console.log('listening on port 3003')})
 ).use(cors())
