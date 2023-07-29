@@ -42,7 +42,7 @@ new Elysia().onStart((()=>{console.log('listening on port 3003')})
       }
     },
 
-  ).listen('3003')
+  ).listen(3003)
   }
  
 
