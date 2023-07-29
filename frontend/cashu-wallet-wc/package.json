@@ -1,10 +1,10 @@
 {
-  "name": "proxnut-wallet",
+  "name": "@proxnut/wallet-comp",
   "description": "a simple cashu wallet designed for proxnut",
   "version": "0.0.1",
   "type": "module",
-  "module": "dist/lib/proxnut-wallet.js",
-  "main": "dist/lib/proxnut-wallet.umd.js",
+  "module": "dist/lib/@proxnut/wallet-comp.js",
+  "main": "dist/lib/@proxnut/wallet-comp.umd.js",
   "scripts": {
     "start": "npm run dev -s",
     "package": "svelte-package",
