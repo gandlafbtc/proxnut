@@ -1,8 +1,8 @@
 import { CashuMint, CashuWallet, Token, getDecodedToken, getEncodedToken } from "@cashu/cashu-ts";
-import { CONFIG } from "./config.js";
 
 import { Elysia } from 'elysia'
 import cors from "@elysiajs/cors";
+import { getConfig } from "./redis";
 
 export const initializeHTTP = () => {
 new Elysia().onStart((()=>{console.log('listening on port 3003')})
@@ -10,8 +10,9 @@ new Elysia().onStart((()=>{console.log('listening on port 3003')})
     .get('*', async ({request}) =>  
   {
       try {
-        const { host, path, fee: hostFee } = createUrl(request.url);
-        const routePath = lookupRoute(path)
+        console.log('request: ', request.url)
+        const { host, path, fee: hostFee } = await createUrl(request.url);
+        const routePath = await lookupRoute(path)
         if (!routePath) {
           return await fetch(host + path, {
             method: request.method,
@@ -44,9 +45,10 @@ new Elysia().onStart((()=>{console.log('listening on port 3003')})
   }
  
 
-function createUrl(url: string): { host: string; path: string; fee: number } {
+async function createUrl(url: string): Promise<{ host: string; path: string; fee: number }> {
   const { protocol, host, port, path } = splitUrl(url);
-  const serviceHost = lookupHost(host, port);
+  const serviceHost = await lookupHost(host, port);
+  console.log('create url: ', serviceHost)
   if (!serviceHost) {
     throw new Error("host is not defined");
   }
@@ -65,13 +67,32 @@ function splitUrl(
   return { protocol, host, port, path };
 }
 
-function lookupHost(host: string, port: string): { to: string; fee: number } {
+async function lookupHost(host: string, port: string): Promise<{ to: string; fee: number }> {
   const key = `${host}${port ? ":" + port : ""}`;
-  return CONFIG.HOST_MAP[key];
+  
+  const config = await getConfig()
+  if (!config.HOST_MAP) {
+    throw new Error("no hosts configured");
+  }
+  const toNFee = config.HOST_MAP.find(h=> h.from===key);
+  if (!toNFee) {
+    throw new Error("host is not mapped");
+  }
+  return {to: toNFee?.to, fee: toNFee?.fee}
 }
 
-function lookupRoute(path: string): { to: string; fee: number } {
-  return CONFIG.ROUTE_MAP[path];
+async function lookupRoute(path: string): Promise<{ to: string; fee: number }> {
+  const config = await getConfig()
+  if (!config.ROUTE_MAP) {
+    throw new Error("no routes configured");
+  }
+  const toNFee = config.ROUTE_MAP.find(h=> 
+    h.from===path
+  );
+  if (!toNFee) {
+    throw new Error("route is not mapped");
+  }
+  return {fee: toNFee.fee, to: toNFee.to}
 }
 
 async function collectFee(fee: number, token: string): Promise<number> {
@@ -96,8 +117,12 @@ async function claimToken(token: string): Promise<number> {
   if (!t) {
     return 0;
   }
+  const config = await getConfig()
+  if (!config.ALLOWED_MINTS) {
+    throw new Error("no mints configured");
+  }
   const filteredTokenEntries = t.token?.filter((tkn) =>
-    CONFIG.ALLOWED_MINTS.includes(tkn.mint)
+    config.ALLOWED_MINTS.includes(tkn.mint)
   );
   if (
     !filteredTokenEntries.map(
@@ -114,7 +139,7 @@ async function claimToken(token: string): Promise<number> {
 async function receiveTokens(token: Token) : Promise<number> {
 
   const baseMint = token.token[0].mint
-  
+  console.log(baseMint)
   const mint  = new CashuMint(baseMint)
   
   const wallet = new CashuWallet(mint)

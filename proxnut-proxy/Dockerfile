@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . .
 RUN bun install
 EXPOSE 3003
-ENTRYPOINT ["bun", "index.ts"]
+ENTRYPOINT ["bun", 'run',  "index.ts"]

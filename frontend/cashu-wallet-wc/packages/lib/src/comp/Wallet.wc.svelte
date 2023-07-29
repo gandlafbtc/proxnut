@@ -151,7 +151,7 @@
 </div>
 
 <style>
-    @import "/cashu-wallet.css";
+    @import url("https://cdn.jsdelivr.net/npm/@proxnut/wallet-comp@0.1.3/dist/lib/static/cashu-wallet.css");
 
     #base-div {
         line-height: 1.5;

@@ -1,6 +1,5 @@
 import { Elysia, ws } from 'elysia'
-import cors from "@elysiajs/cors";
-import { CONFIG } from './config';
+
 
 
 export const initializeWS = () => {
