@@ -9,6 +9,8 @@
     let jsonContents;
     let imageContents;
 
+    let err
+
     const unlock = () => {
         isLoading = true;
         cashuRequest(price, urlBase + id, successUnlock, failUnlock);
@@ -42,6 +44,7 @@
 
     const failUnlock = (e) => {
         console.log(e.detail.error);
+        err = e.detail.error
         isLoading = false;
     };
 
@@ -109,6 +112,9 @@
             <button class="btn btn-secondary" on:click={unlock}>
                 unlock ({price} sats)
             </button>
+        {/if}
+        {#if (!contents && !jsonContents && !imageContents) && err }
+            <p class="text-red-400">{err}</p>
         {/if}
     </div>
 </div>

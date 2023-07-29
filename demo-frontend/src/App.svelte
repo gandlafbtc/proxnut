@@ -1,5 +1,5 @@
 <svelte:head>
-  <script type="module" src="/proxnut-wallet.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@proxnut/wallet-comp@0.1.0/dist/lib/@proxnut/wallet-comp.js"></script>
 </svelte:head>
 <script lang="ts">
   import "./app.css";
