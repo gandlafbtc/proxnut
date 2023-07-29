@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { transform } from 'esbuild';
+import path from 'path'
 import pkg from './package.json';
 
 const bundleComponents = process.env.BUNDLE_COMPONENTS ?? true;
@@ -30,6 +32,14 @@ export default defineConfig({
     }
   },
   plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: path.resolve(__dirname, './static'),
+          dest: '.',
+        },
+      ],
+    }),
     svelte({
       exclude: /\.wc\.svelte$/ as any,
       compilerOptions: {
