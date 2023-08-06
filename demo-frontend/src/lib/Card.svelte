@@ -4,7 +4,7 @@
     export let title;
     export let price;
 
-    const urlBase = "https://localhost:3003/";
+    const urlBase = "http://localhost:3003/";
     let isLoading = false;
     let contents;
     let jsonContents;
