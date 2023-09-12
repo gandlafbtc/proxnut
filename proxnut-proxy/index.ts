@@ -1,12 +1,12 @@
-import { CashuMint, CashuWallet, Token, getDecodedToken, getEncodedToken } from "@gandlaf21/cashu-ts";
+import { CashuMint, CashuWallet, Token, getDecodedToken, getEncodedToken } from "@cashu/cashu-ts";
 
-import { getConfig } from "./redis";
+import { getConfig, storeToken } from "./redis";
 
 import { Hono } from 'hono'
 
-const app = new Hono()
 import { cors } from 'hono/cors'
 
+const app = new Hono()
 
 app.use('*', cors())
 app.get('*', async ({req: request}) =>  
@@ -120,7 +120,7 @@ async function claimToken(token: string): Promise<number> {
     throw new Error("no mints configured");
   }
   const filteredTokenEntries = t.token?.filter((tkn) =>
-    config.ALLOWED_MINTS.includes(tkn.mint)
+  config.ALLOWED_MINTS.includes(tkn.mint)
   );
   if (
     !filteredTokenEntries.map(
@@ -129,6 +129,7 @@ async function claimToken(token: string): Promise<number> {
   ) {
     return 0;
   }
+  
   const amountReceived = await receiveTokens({token: filteredTokenEntries})
   
   return amountReceived;
@@ -137,15 +138,17 @@ async function claimToken(token: string): Promise<number> {
 async function receiveTokens(token: Token) : Promise<number> {
 
   const baseMint = token.token[0].mint
-  console.log(baseMint)
   const mint  = new CashuMint(baseMint)
-  
   const wallet = new CashuWallet(mint)
   
-  console.log(token)
+  
   try {
+    console.log(token)
     const {token: receivedToken} = await wallet.receive(getEncodedToken(token))
-    console.log("yo")
+    const config = await getConfig()
+    if (receivedToken?.token[0]?.proofs.length && config.GENERAL.isStoreTokens) {
+      await storeToken(getEncodedToken(receivedToken))
+    }
     return receivedToken.token.map(
       (tkn) => tkn.proofs,
       ).flat().reduce((curr, val) => curr+val.amount, 0)

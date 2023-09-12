@@ -2,7 +2,7 @@
 
 cashu-wallet.js
 redis-volume
-
+*.rdb
 # Logs
 
 logs

@@ -12,9 +12,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@gandlaf21/cashu-ts": "^0.8.0-rc.8",
+    "@cashu/cashu-ts": "^0.8.1",
     "@elysiajs/cors": "^0.6.0-rc.0",
-    "elysia": "^0.6.0",
     "hono": "^3.3.4",
     "redis": "^4.6.7"
   }
