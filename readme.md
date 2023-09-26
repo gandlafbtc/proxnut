@@ -1,24 +1,47 @@
-# Proxnut: a cashu proxy that asks for nuts for a right of passage
+# Proxnut: a cashu proxy that asks for nuts to get right of passage
 
 
 <img src="https://proxnut.com/X-bg.svg" width="112px" height="112px">
 
 <img src="https://proxnut.com/proxnut_black.svg" style="fill:#333333;" width="112px" height="112px">
 
-`Protect or monetize web resources with a Cashu ecash proxy.`
+`Protect or monetize web resources with a Cashu ecash proxy. This is a work in progress. Demo does not work yet (presumably because of incompatibility issues between deno and cashu-ts). Bun seems to work fine, with exactly the same code. To test this, please use the code in the bun folder.`
 
-This is a work in progress. Deno does not work yet (presumably because of incompatibility issues between deno and cashu-ts). Bun seems to work fine, with exactly the same code. 
+---
 
-To test this, please use the code in the bun folder.
+# ProxNut: Cashu Proxy for Web Requests
 
-## How it works
+![ProxNut Logo](path/to/logo.png)  <!-- Replace with the actual path to the logo if available -->
 
+**ProxNut** is a Cashu proxy designed to protect or monetize web resources. Seamlessly integrate with a Cashu ecash wallet, allowing users to access protected resources using tokens.
+
+## 🌟 Features
+
+- **Ecash Wallet Integration**: Seamlessly top up and spend tokens.
+- **Resource Protection**: Protect and monetize your web resources with ease.
+- **Open-Source**: Join our community and contribute to the project.
+
+## 🛠 Installation
+
+While the project is still in progress, you can test it using the code in the `bun` folder. For a comprehensive installation guide, including using Docker Compose and manual setup, refer to our [technical documentation](path/to/documentation).
+
+## 🔄 How It Works
+
+ProxNut forwards requests only if they have a valid Cashu token attached to the X-Cashu header. Configuration options include mapping hosts, routes, setting fees, and specifying allowed mints.
 ![setup](./docs/setup.png)
 
-
-## How to configure it
+## ⚙ Configuration
 
 This proxy forwards requests only if they have a valid cashu token attached to the X-Cashu header. Configuration on mapping hosts, routes and how expensive routes are, can be made in the `config.ts` file. You can also configure the allowed mints.
+
+- **Host & Route Mapping**: Define how requests are routed and the associated fees. Both host and route fees are cumulative.
+- **Mints**: Add mints you run. Note: Currently, you can only use mints you run yourself due to the absence of a swap-out function for the proxy.
+
+For detailed configuration instructions, check the [technical documentation](https://github.com/gandlafbtc/proxnut/wiki/).
+
+## 🚀 Usage
+
+Run the entire stack with Docker Compose or manually. The provided demo backend offers both unprotected and protected resources for testing.
 
 ### Adding protected resources
 To add a host mapping, add a line to the HOST_MAP dictionary:
@@ -39,7 +62,7 @@ To add a mint, add the URL of the mint to the `ALLOWED_MINTS` list if the config
 
 `ALLOWED_MINTS`: ```["<mint-url1>","<mint-url2"....>]```
 
-## How to run
+### How to run
 
 The whole stack can be run with docker compose: 
 
@@ -52,7 +75,6 @@ this will run the applications on the following ports:
 1. `backend` on port `4444`
 
 
-
 or you can use the manual setup:
 
 1. install bun: 
@@ -63,8 +85,9 @@ or you can use the manual setup:
 
 On the demo backend, there is a unprotected resources, that routes freely (`/`) and there is a protected resource (`/test`) that asks for 1 satoshi per request.
 
-### Example frontend
-There is an example frontend in the `frontend/cashu-wallet-wc` folder, that can be run alongside the two other services. To use it, the wallet component must first be built from source:
+## 🌐 Example Frontend
+
+An example frontend is provided in the `frontend/cashu-wallet-wc` folder. This frontend showcases how users can interact with ProxNut, especially in terms of wallet operations, that can be run alongside the two other services. To use it, the wallet component must first be built from source:
 
 1. `cd frontend/cashu-wallet-wc`
 1. `npm i`
@@ -75,3 +98,19 @@ after that, the `index.html` can be served as a web page. for example:
 
 1. `npm i -g http-server`
 1. `http-server`
+
+## 🤝 Contributing
+
+We welcome contributions! If you'd like to contribute to ProxNut, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss the proposed change.
+
+## 📜 License
+
+ProxNut is licensed under the MIT License. See the `LICENSE` file for more details.
+
+## 📞 Contact
+
+---
+
+For support, inquiries, or feedback, visit [ProxNut.com](https://proxnut.com), send us a message on [Telegram](https://t.me/+RqnidzaUl-tkMDRl) or opena an [issue](https://github.com/gandlafbtc/proxnut/issues/new) on our GitHub Repository.
+
+---
