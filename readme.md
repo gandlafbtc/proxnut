@@ -3,7 +3,7 @@
 
 <img src="https://proxnut.com/X-bg.svg" width="112px" height="112px">
 
-<img src="https://proxnut.com/proxnut_black.svg" fill="#333333" width="112px" height="112px">
+<img src="https://proxnut.com/proxnut_black.svg" style="fill:#333333;" width="112px" height="112px">
 
 `Protect or monetize web resources with a Cashu ecash proxy.`
 
