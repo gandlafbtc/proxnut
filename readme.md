@@ -109,6 +109,6 @@ ProxNut is licensed under the MIT License. See the `LICENSE` file for more detai
 
 ---
 
-For support, inquiries, or feedback, visit [ProxNut.com](https://proxnut.com), send us a message on [Telegram](https://t.me/+RqnidzaUl-tkMDRl) or opena an [issue](https://github.com/gandlafbtc/proxnut/issues/new) on our GitHub Repository.
+For support, inquiries, or feedback, visit [ProxNut.com](https://proxnut.com), send us a message on [Telegram](https://t.me/+RqnidzaUl-tkMDRl) or open an [issue](https://github.com/gandlafbtc/proxnut/issues/new) on our GitHub Repository.
 
 ---
