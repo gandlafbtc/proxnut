@@ -1,8 +1,10 @@
 # Proxnut: a cashu proxy that asks for nuts for a right of passage
 
 
-<img src="[docs/proxnut.png](https://proxnut.com/X-bg.svg)" width="112px" height="112px">
-<img src="[docs/proxnut.png](https://proxnut.com/proxnut_black.svg)" width="112px" height="112px">
+<img src="https://proxnut.com/X-bg.svg" width="112px" height="112px">
+
+<img src="https://proxnut.com/proxnut_black.svg" width="112px" height="112px">
+
 `Protect or monetize web resources with a Cashu ecash proxy.`
 
 This is a work in progress. Deno does not work yet (presumably because of incompatibility issues between deno and cashu-ts). Bun seems to work fine, with exactly the same code. 
