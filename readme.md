@@ -11,8 +11,6 @@
 
 # ProxNut: Cashu Proxy for Web Requests
 
-![ProxNut Logo](path/to/logo.png)  <!-- Replace with the actual path to the logo if available -->
-
 **ProxNut** is a Cashu proxy designed to protect or monetize web resources. Seamlessly integrate with a Cashu ecash wallet, allowing users to access protected resources using tokens.
 
 ## 🌟 Features
@@ -23,11 +21,12 @@
 
 ## 🛠 Installation
 
-While the project is still in progress, you can test it using the code in the `bun` folder. For a comprehensive installation guide, including using Docker Compose and manual setup, refer to our [technical documentation](path/to/documentation).
+While the project is still in progress, you can test it using the code in the `bun` folder. For a comprehensive installation guide, including using Docker Compose and manual setup, refer to our [technical documentation](https://github.com/gandlafbtc/proxnut/wiki/).
 
 ## 🔄 How It Works
 
 ProxNut forwards requests only if they have a valid Cashu token attached to the X-Cashu header. Configuration options include mapping hosts, routes, setting fees, and specifying allowed mints.
+
 ![setup](./docs/setup.png)
 
 ## ⚙ Configuration
@@ -107,7 +106,6 @@ We welcome contributions! If you'd like to contribute to ProxNut, please fork th
 
 ProxNut is licensed under the MIT License. See the `LICENSE` file for more details.
 
-## 📞 Contact
 
 ---
 
