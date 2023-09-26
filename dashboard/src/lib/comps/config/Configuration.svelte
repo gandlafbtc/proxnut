@@ -63,10 +63,6 @@
 	</div>
 	<General bind:general={config.GENERAL}></General>
 	<Mints bind:mints={config.ALLOWED_MINTS} />
-    <div class="divider">
-		<p class="font-bold text-primary">Hosts</p>
-	</div>
-	<Routes bind:routes={config.HOST_MAP}></Routes>
 	<div class="divider">
 		<p class="font-bold text-primary">Routes</p>
 	</div>

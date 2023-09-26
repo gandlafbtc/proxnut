@@ -19,7 +19,6 @@ export const getConfig = async (): Promise<Config> => {
   if (!configStr) {
     configStr = '{"general":{"isStoreTokens": "true" }}';
   }
-  console.log('eehhh')
   const config: Config = JSON.parse(configStr);
   return config;
 };

@@ -4,7 +4,7 @@
     export let routes: ProxyMapping[]
     let from = ''
     let to = ''
-    let fee
+    let fee = 0
 
     const addRoute = async () => {
        if (!routes) {
@@ -26,7 +26,12 @@
 
 	
 	<div class="flex flex-col lg:flex-row gap-3 items-center">
-		<input type="text" placeholder="from" class="input input-primary input-sm" bind:value={from} />
+		
+		<p class="text-primary">
+			http://localhost:3003
+
+		</p>
+		<input type="text" placeholder="/proxy/access/path/" class="input input-primary input-sm" bind:value={from} />
 		<svg
 		xmlns="http://www.w3.org/2000/svg"
 			fill="none"
@@ -42,7 +47,7 @@
 				/>
 			</svg>
 
-		<input type="text" class="input input-primary input-sm" placeholder="to" bind:value={to}/>
+		<input type="text" class="input input-primary input-sm" placeholder="http://host:port/to/endpoint" bind:value={to}/>
 		<input type="number" class="input input-primary w-32 input-sm" placeholder="fee (sats)" bind:value={fee} />
 		<button class="btn btn-secondary btn-sm" on:click={addRoute}>add</button>
 	</div>

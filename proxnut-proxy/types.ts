@@ -7,7 +7,6 @@ export interface Config {
   GENERAL: {
     isStoreTokens: boolean
   }
-  HOST_MAP: ProxyMapping[];
   ROUTE_MAP: ProxyMapping[];
   ALLOWED_MINTS: string[];
   MODE: Mode;
