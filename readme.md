@@ -5,7 +5,7 @@
 
 <img src="https://proxnut.com/proxnut_black.svg" style="fill:#333333;" width="112px" height="112px">
 
-`Protect or monetize web resources with a Cashu ecash proxy. This is a work in progress. Demo does not work yet (presumably because of incompatibility issues between deno and cashu-ts). But seems to work fine, with exactly the same code. To test this, please use the code in the bun folder.`
+`Protect or monetize web resources with a Cashu ecash proxy. This is a work in progress.`
 
 ---
 
