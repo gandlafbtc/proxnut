@@ -90,6 +90,7 @@ here is an example on how to integrate proxnut into your frontend with the proxn
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>PROXNUT dummy</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- 1. Import all necessary components -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/@proxnut/wallet-comp@0.2.0/dist/lib/@proxnut/wallet-comp.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuRequest.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuGoto.js"></script>
@@ -99,6 +100,7 @@ here is an example on how to integrate proxnut into your frontend with the proxn
     <div style="position: absolute; right: 10px;">
         <proxnut-wallet minturl="https://8333.space:3338"></proxnut-wallet>
     </div>
+    <!-- 2. Add call the functions from your html interactive -->
     <button onclick="goto()" style="color: black; cursor: pointer;">
         follow link
     </button>
@@ -109,6 +111,7 @@ here is an example on how to integrate proxnut into your frontend with the proxn
 </html>
 
 <script>
+
  const successUnlock = async (response, e) => {
     const contents = await response.text();
     const data = await response.json();
@@ -116,14 +119,18 @@ here is an example on how to integrate proxnut into your frontend with the proxn
  }
 
 const goto = () =>{
+    // cashuGoto will redirect to a new page, with cashu tokens attached as a query param
     cashuGoto(1, 'localhost:3003/protected',()=>{alert('no nuts!')})
     
 }
 const request = () => {
+    // cashuRequest will redirect to a new page with the cashu token in the X-cashu header
     cashuRequest(1, 'localhost:3003/api/protected', successUnlock, ()=>{alert('no nuts!')});
 }
 </script>
 ```
+
+
 
 ## 🤝 Contributing
 
