@@ -9,12 +9,20 @@ services:
     environment:
       - PROXY_HOST=proxnut
       - BACKEND_HOST=backend
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
   backend:
     build:
       context: ./demo-backend
       dockerfile: Dockerfile
     ports:
         - "4444:4444"
+  webserver:
+    build:
+      context: ./demo-webserver
+      dockerfile: Dockerfile
+    ports:
+        - "4445:4445"
 
   frontend:
     build:
@@ -28,4 +36,20 @@ services:
       dockerfile: Dockerfile
     ports:
         - "5173:5173"
-
+  redis:
+    command: redis-server --appendonly yes
+    image: redis
+    ports:
+        - "6379:6379"
+    volumes:
+        - ./redis-volume:/data
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+        - "5515:5515"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      

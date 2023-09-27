@@ -4,16 +4,17 @@ export enum Mode {
 }
 
 export interface Config {
-  HOST_MAP: Dictionary;
-  ROUTE_MAP: Dictionary;
+  GENERAL: {
+    isStoreTokens: boolean
+  }
+  ROUTE_MAP: ProxyMapping[];
   ALLOWED_MINTS: string[];
   MODE: Mode;
-  WEBSOCKET_MODE: boolean
+  WEBSOCKET_MODE: boolean;
 }
 
-export interface Dictionary {
-  [key: string]: {
-    to: string;
-    fee: number;
-  };
+export interface ProxyMapping {
+  from: string;
+  to: string;
+  fee: number;
 }

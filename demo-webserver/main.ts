@@ -1,48 +1,36 @@
-import { CashuMint, CashuWallet, Token, getDecodedToken, getEncodedToken } from "@cashu/cashu-ts";
-import { CONFIG } from "./config.js";
+import { serveListener } from "https://deno.land/std@0.189.0/http/server.ts";
+import {
+  CashuMint,
+  CashuWallet,
+  getDecodedToken,
+  getEncodedToken,
+  Token
+} from "npm:@cashu/cashu-ts@0.8.0-rc.4";
+import { CONFIG } from "../bun/config.ts";
 
-import { Elysia } from 'elysia'
-import cors from "@elysiajs/cors";
+const listener = Deno.listen({ port: 4505 });
 
-export const initializeHTTP = () => {
-new Elysia().onStart((()=>{console.log('listening on port 3003')})
-).use(cors())
-    .get('*', async ({request}) =>  
-  {
-      try {
-        const { host, path, fee: hostFee } = createUrl(request.url);
-        const routePath = lookupRoute(path)
-        if (!routePath) {
-          return await fetch(host + path, {
-            method: request.method,
-            headers: request.headers,
-            body: request.body,
-          })
-        }
-        const { to: serviceRoute, fee: routeFee } = routePath;
-        const fee = hostFee + routeFee;
-        if (fee) {
-          console.log('resource has a fee')
-          await collectFee(fee, request.headers.get("X-Cashu") ?? "");
-        }
+console.log("server listening on http://localhost:4505");
 
-        const response = await fetch(host + serviceRoute, {
-          method: request.method,
-          headers: request.headers,
-          body: request.body,
-        })
-
-        return response
-      } catch (error) {
-        console.error(error);
-        const response = new Response(error, { status: 500 });
-        return response
-      }
-    },
-
-  ).listen(3003)
+await serveListener(listener, async (request) => {
+  try {
+    const { host, path, fee: hostFee } = createUrl(request.url);
+    const { to: serviceRoute, fee: routeFee } = lookupRoute(path);
+    const fee = hostFee + routeFee;
+    if (fee) {
+      console.log('resource has a fee')
+      await collectFee(fee, request.headers.get("X-Cashu") ?? "");
+    }
+    return await fetch(host + serviceRoute, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body,
+    });
+  } catch (error) {
+    console.error(error);
+    return new Response(error, { status: 500 });
   }
- 
+});
 
 function createUrl(url: string): { host: string; path: string; fee: number } {
   const { protocol, host, port, path } = splitUrl(url);
@@ -80,7 +68,7 @@ async function collectFee(fee: number, token: string): Promise<number> {
   }
   const collectedFee = await claimToken(token)
   if (collectedFee<fee) {
-    throw new Error(`Token in X-Cashu did not yield enough... supplied: ${collectFee} sats ---- needed: ${fee} sats` );
+    throw new Error("Token in X-Cashu did not yield enough");
   }
   return collectedFee
 }

@@ -1,7 +1,7 @@
 {
   "name": "@proxnut/wallet-comp",
   "description": "a simple cashu wallet designed for proxnut",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "module": "dist/lib/@proxnut/wallet-comp.js",
   "main": "dist/lib/@proxnut/wallet-comp.umd.js",
