@@ -121,7 +121,7 @@ const goto = () =>{
     
 }
 const request = () => {
-    // cashuRequest will redirect to a new page with the cashu token in the X-cashu header. 
+    // cashuRequest will send an async request with the cashu token in the X-cashu header. 
     cashuRequest(1, 'localhost:3003/api/protected', successUnlock, ()=>{alert('no nuts!')});
 }
 </script>
