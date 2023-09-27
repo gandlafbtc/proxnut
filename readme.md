@@ -1,9 +1,10 @@
 # Proxnut: a cashu proxy that asks for nuts to get right of passage
 
+⚠️This is a work in progress. Please do not use in production. Only test with small amounts.⚠️
 
 ![logo](docs/PROXNUT_avatar.png)
 
-`Protect or monetize web resources with a Cashu ecash proxy. This is a work in progress.`
+`Protect or monetize web resources with a Cashu ecash proxy.`
 
 ---
 
