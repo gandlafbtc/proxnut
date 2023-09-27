@@ -31,9 +31,9 @@ ProxNut forwards requests only if they have a valid Cashu token attached to the 
 
 ## ⚙ Configuration
 
-This proxy forwards requests only if they have a valid cashu token attached to the X-Cashu header. Configuration on mapping hosts, routes and how expensive routes are, can be made in the `config.ts` file. You can also configure the allowed mints.
+This proxy forwards requests only if they have a valid cashu token attached to the X-Cashu header. Configuration on mapping routes and how expensive routes are, can be made in the `dashboard`. You can also configure the allowed mints there.
 
-- **Host & Route Mapping**: Define how requests are routed and the associated fees. Both host and route fees are cumulative.
+- **Route Mapping**: Define how requests are routed and the associated fees.
 - **Mints**: Add mints you run. Note: Currently, you can only use mints you run yourself due to the absence of a swap-out function for the proxy.
 
 For detailed configuration instructions, check the [technical documentation](https://github.com/gandlafbtc/proxnut/wiki/).
@@ -42,24 +42,6 @@ For detailed configuration instructions, check the [technical documentation](htt
 
 Run the entire stack with Docker Compose or manually. The provided demo backend offers both unprotected and protected resources for testing.
 
-### Adding protected resources
-To add a host mapping, add a line to the HOST_MAP dictionary:
-
-`HOST_MAP`: ```"<host-map-from>": {to:"<host-map-to>", fee: <fee>}```
-
-To add a route mapping, add a line to the ROUTE_MAP dictionary:
-
-`ROUTE_MAP`: ```"<route-map-from>": {to:"<route-map-to>", fee: <fee>}```
-
-the fees from the host and the route will be added to calculate the final fee required to access a resource.
-
-
-### Adding mints
-Finally, you can add the mints that you run. Note that currently you can only use mints that you run yourself, since there is no swap out function for the proxy currently. This functionality will be introduced later as a `MODE` option.
-
-To add a mint, add the URL of the mint to the `ALLOWED_MINTS` list if the config
-
-`ALLOWED_MINTS`: ```["<mint-url1>","<mint-url2"....>]```
 
 ### How to run
 
@@ -84,19 +66,64 @@ or you can use the manual setup:
 
 On the demo backend, there is a unprotected resources, that routes freely (`/`) and there is a protected resource (`/test`) that asks for 1 satoshi per request.
 
-## 🌐 Example Frontend
+### Adding protected resources
 
-An example frontend is provided in the `frontend/cashu-wallet-wc` folder. This frontend showcases how users can interact with ProxNut, especially in terms of wallet operations, that can be run alongside the two other services. To use it, the wallet component must first be built from source:
+Access the dashboard at: http://localhost:5515 . Here you can add a route that the proxy should forward. Make sure to include the local network host in the route you wish to route to!
 
-1. `cd frontend/cashu-wallet-wc`
-1. `npm i`
-1. `npm run build`
-1. `cp dist/lib/cashu-wallet.js .`
+> from: `/some/route` ---> to: `http://localhost:4444/1` | fee: 1
 
-after that, the `index.html` can be served as a web page. for example:
 
-1. `npm i -g http-server`
-1. `http-server`
+### Adding mints
+Finally, you can add the mints that you allow. 
+
+To add a mint, head to the dashboard at http://localhost:5515 and add a mint.
+
+### Integrate into frontend
+
+here is an example on how to integrate proxnut into your frontend with the proxnut-wallet web component:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>PROXNUT dummy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@proxnut/wallet-comp@0.2.0/dist/lib/@proxnut/wallet-comp.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuRequest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuGoto.js"></script>
+
+</head>
+<body>
+    <div style="position: absolute; right: 10px;">
+        <proxnut-wallet minturl="https://8333.space:3338"></proxnut-wallet>
+    </div>
+    <button onclick="goto()" style="color: black; cursor: pointer;">
+        follow link
+    </button>
+    <button onclick="request()" style="color: black; cursor: pointer;">
+        make an async request
+    </button>
+</body>
+</html>
+
+<script>
+ const successUnlock = async (response, e) => {
+    const contents = await response.text();
+    const data = await response.json();
+    alert(data)
+ }
+
+const goto = () =>{
+    cashuGoto(1, 'localhost:3003/protected',()=>{alert('no nuts!')})
+    
+}
+const request = () => {
+    cashuRequest(1, 'localhost:3003/api/protected', successUnlock, ()=>{alert('no nuts!')});
+}
+</script>
+```
 
 ## 🤝 Contributing
 

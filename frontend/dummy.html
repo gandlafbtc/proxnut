@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>PROXNUT dummy</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@proxnut/wallet-comp@0.2.0/dist/lib/@proxnut/wallet-comp.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuRequest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@proxnut/cashu-request@0.1.6/cashuGoto.js"></script>
+
+</head>
+<body>
+    <div style="position: absolute; right: 10px;">
+        <proxnut-wallet minturl="https://8333.space:3338"></proxnut-wallet>
+    </div>
+    <button onclick="goto()" style="color: black; cursor: pointer;">
+        follow link
+    </button>
+    <button onclick="request()" style="color: black; cursor: pointer;">
+        make an async request
+    </button>
+</body>
+</html>
+
+<script>
+ const successUnlock = async (response, e) => {
+    const contents = await response.text();
+    const data = await response.json();
+    alert(data)
+ }
+
+const goto = () =>{
+    cashuGoto(1, 'localhost:3003/protected',()=>{alert('no nuts!')})
+    
+}
+const request = () => {
+    cashuRequest(1, 'localhost:3003/api/protected', successUnlock, ()=>{alert('no nuts!')});
+}
+</script>
