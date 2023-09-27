@@ -17,6 +17,12 @@ services:
       dockerfile: Dockerfile
     ports:
         - "4444:4444"
+  webserver:
+    build:
+      context: ./demo-webserver
+      dockerfile: Dockerfile
+    ports:
+        - "4445:4445"
 
   frontend:
     build:

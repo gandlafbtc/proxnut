@@ -78,7 +78,7 @@ async function lookupRoute(url: string): Promise<{ to: string|undefined; fee: nu
 
 async function collectFee(fee: number, token: string): Promise<number> {
   if (!token) {
-    throw new Error("No token found in X-Cashu header");
+    return Promise.resolve(0)
   }
   const collectedFee = await claimToken(token);
 

@@ -9,9 +9,9 @@ export default {
     themes: [{custom: {
       "primary": "#6ba7cc",
       "secondary": "#aedbf0",
-      "accent": "##F2A863",
+      "accent": "#F2A863",
       "neutral": "#e2fcff",
-      "base-100": "#fafeff",
+      "base-100": "#111827",
 
       "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
       "--rounded-btn": "5rem", // border radius rounded-btn utility class, used in buttons and similar element

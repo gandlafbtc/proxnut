@@ -1,5 +1,5 @@
 FROM denoland/deno:latest
-EXPOSE 4444
+EXPOSE 4445
 
 WORKDIR /app
 
