@@ -17,6 +17,7 @@
 
 - **Ecash Wallet Integration**: Seamlessly top up and spend tokens.
 - **Resource Protection**: Protect and monetize your web resources with ease.
+- **Privacy by default**: No accounts and no tracking. Leveraging ecash privacy.
 - **Open-Source**: Join our community and contribute to the project.
 
 ## 🛠 Installation
