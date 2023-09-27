@@ -106,10 +106,8 @@ here is an example on how to integrate proxnut into your frontend with the proxn
     <button onclick="request()" style="color: black; cursor: pointer;">
         make an async request
     </button>
-</body>
-</html>
-
 <script>
+// 3. Add required logic
 
  const successUnlock = async (response, e) => {
     const contents = await response.text();
@@ -123,10 +121,14 @@ const goto = () =>{
     
 }
 const request = () => {
-    // cashuRequest will redirect to a new page with the cashu token in the X-cashu header
+    // cashuRequest will redirect to a new page with the cashu token in the X-cashu header. 
     cashuRequest(1, 'localhost:3003/api/protected', successUnlock, ()=>{alert('no nuts!')});
 }
 </script>
+</body>
+</html>
+
+
 ```
 
 
